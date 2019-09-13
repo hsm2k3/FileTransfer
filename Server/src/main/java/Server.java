@@ -8,7 +8,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 public class Server extends Thread {
-    public static final int PORT = 4333;
+    public static final int PORT = 35103;
     public static final int BUFFER_SIZE = 626;
 
     @Override
@@ -16,7 +16,7 @@ public class Server extends Thread {
     {
         try
         {
-            ServerSocket serverSocket = new ServerSocket(35103);
+            ServerSocket serverSocket = new ServerSocket(PORT);
             System.out.println("listening on port: " + serverSocket.getLocalPort());
             while(true)
             {
