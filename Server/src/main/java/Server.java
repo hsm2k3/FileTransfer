@@ -1,53 +1,42 @@
-
-
-import java.io.BufferedOutputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 
 public class Server extends Thread {
-    public static final int PORT = 35103;
+
+    public static final int PORT = 3332;
     public static final int BUFFER_SIZE = 626;
 
     @Override
-    public void run()
-    {
-        try
-        {
+    public void run() {
+        try {
             ServerSocket serverSocket = new ServerSocket(PORT);
-            System.out.println("listening on port: " + serverSocket.getLocalPort());
-            while(true)
-            {
-                Socket socket = serverSocket.accept();
-                saveFile(socket);
+            while (true) {
+                Socket s = serverSocket.accept();
+                saveFile(s);
             }
-        }
-        catch(Exception exception)
-        {
-            exception.printStackTrace();
+        } catch (Exception e) {
         }
     }
 
-    private void saveFile(Socket socket) throws IOException {
+    private void saveFile(Socket socket) throws Exception {
         InputStream inputStream = socket.getInputStream();
-        FileOutputStream fileOutputStream = new FileOutputStream("/home/alex/Success_testTransfer.txt");
+        FileOutputStream fileOutputStream = new FileOutputStream("/home/alex/Documents/success_test.txt");;
 
         byte[] byteArray = new byte[1024];
-        System.out.println("Reading file from server.");
+        System.out.println("Reading file from server...");
         BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(fileOutputStream);
         int bytesRead;
-        while((bytesRead = inputStream.read(byteArray)) != -1 )
-        {
-            bufferedOutputStream.write(byteArray);
+        while ((bytesRead = inputStream.read(byteArray)) != -1) {
+            bufferedOutputStream.write(byteArray, 0, bytesRead);
         }
 
         bufferedOutputStream.close();
-        System.out.println("Writing file complete.");
-    }
-    public static void main (String[] args) throws IOException {
-        new Server().start();
+        System.out.println("Writing file complete...");
 
+    }
+
+    public static void main(String[] args) {
+        new Server().start();
     }
 }
