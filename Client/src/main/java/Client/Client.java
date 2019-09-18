@@ -13,11 +13,11 @@ public class Client {
         try {
             File file = new File(fileName);
             Socket socket = new Socket("localhost", PORT);
-            byte[] mybytearray = new byte[(int) file.length()];
+            byte[] byteArray = new byte[(int) file.length()];
             BufferedInputStream bufferedInputStream = new BufferedInputStream(new FileInputStream(file));
-            bufferedInputStream.read(mybytearray, 0, mybytearray.length);
+            bufferedInputStream.read(byteArray, 0, byteArray.length);
             OutputStream outputStream = socket.getOutputStream();
-            outputStream.write(mybytearray, 0, mybytearray.length);
+            outputStream.write(byteArray, 0, byteArray.length);
             outputStream.flush();
             outputStream.close();
         } catch (Exception e) {
