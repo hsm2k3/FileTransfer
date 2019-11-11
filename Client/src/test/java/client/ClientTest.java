@@ -1,6 +1,5 @@
 package client;
 
-import Client.Client;
 import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.powermock.core.classloader.annotations.PrepareForTest;
