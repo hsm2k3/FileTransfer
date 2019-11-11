@@ -1,5 +1,6 @@
 package client;
 
+import app.App;
 import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.powermock.core.classloader.annotations.PrepareForTest;
@@ -16,6 +17,7 @@ import static org.mockito.Mockito.mock;
 public class ClientTest {
     Client client;
     File file;
+    App app;
     FileOutputStream fileOutputStream;
     Socket socket;
     byte[] byteArray;
@@ -25,6 +27,7 @@ public class ClientTest {
     {
         client = mock(Client.class);
         file = mock(File.class);
+        app = mock(App.class);
         fileOutputStream = mock(FileOutputStream.class);
         socket = mock(Socket.class);
         byteArray = new byte[8];

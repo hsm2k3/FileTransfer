@@ -26,19 +26,31 @@ public class Server extends Thread {
 
     private void saveFile(Socket socket) throws Exception {
         InputStream inputStream = socket.getInputStream();
-        FileOutputStream fileOutputStream = new FileOutputStream("/home/alex/Documents/success_test.pdf");;
+        FileOutputStream outputStream = new FileOutputStream("/home/alex/Documents/success_test.pdf");;
 
         byte[] byteArray = new byte[1024];
-        System.out.println("Reading file from server...");
-        BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(fileOutputStream);
-        int bytesRead;
-        while ((bytesRead = inputStream.read(byteArray)) != -1) {
-            bufferedOutputStream.write(byteArray, 0, bytesRead);
+        try {
+            System.out.println("Reading file from server...");
+            BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(outputStream);
+            int bytesRead;
+            while ((bytesRead = inputStream.read(byteArray)) != -1) {
+                bufferedOutputStream.write(byteArray, 0, bytesRead);
+            }
+
+            bufferedOutputStream.close();
+            System.out.println("Writing file complete...");
         }
-
-        bufferedOutputStream.close();
-        System.out.println("Writing file complete...");
-
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
+        finally
+        {
+            if(inputStream != null)
+                inputStream.close();
+            if(outputStream != null)
+                outputStream.close();
+        }
     }
 
     public static boolean isPortAvailable()
