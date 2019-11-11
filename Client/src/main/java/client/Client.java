@@ -1,7 +1,7 @@
-package Client;
+package client;
 
 import java.io.*;
-import GUI.Main.MainGUI;
+import app.MainGUI;
 import java.net.Socket;
 
 
